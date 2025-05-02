@@ -1,13 +1,12 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Header from "./components/shared/Header/";
+import Footer from "./components/shared/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
-
+ 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -26,15 +25,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <header>
-          <nav>
-            <ul>
-              <li><Link href={"/"}>Home</Link></li>
-              <li><Link href={"/store"}>Store</Link></li>
-            </ul>
-          </nav>
-        </header>
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
