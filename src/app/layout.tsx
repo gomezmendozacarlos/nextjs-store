@@ -1,17 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Roboto } from 'next/font/google'
 import Header from "../components/shared/Header";
 import Footer from "../components/shared/Footer";
+import { Metadata } from "next";
 import "app/sass/globals.sass";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
- 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const roboto = Roboto({
+  subsets: ['latin'] 
+})
 
 export const metadata: Metadata = {
   title: "Itos Store",
@@ -25,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={roboto.className}>
         <Header />
         {children}
         <Footer />
