@@ -6,7 +6,6 @@ interface CategoriesProps {
 }
 function Categories(props: CategoriesProps ) {
   const { categories } = props.params
-  
   return (
     <h1>
       Categoria Dinamica: {categories}
