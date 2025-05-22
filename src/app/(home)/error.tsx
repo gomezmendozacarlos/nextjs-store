@@ -1,10 +1,13 @@
 "use client";
+
+import { JSX } from "react";
+
 interface ErrorProp {
   error: Error;
   reset: () => void;
 }
 
-function Error({ reset }: ErrorProp) {
+function Error({ reset }: ErrorProp): JSX.Element {
   return (
     <div
       style={{

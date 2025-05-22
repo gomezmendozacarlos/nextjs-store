@@ -1,6 +1,7 @@
+import { JSX } from "react";
 import styles from "./Hero.module.sass";
 
-function Hero() {
+function Hero(): JSX.Element {
   return (
     <section className={styles.Hero}>
       <h1>Itos Store</h1>
