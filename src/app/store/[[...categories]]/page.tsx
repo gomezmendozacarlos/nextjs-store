@@ -1,20 +1,38 @@
 import { ProductsWrapper } from "app/components/Store/ProductsWrapper";
-import { getCollections } from "app/services/shopify/collections";
+import {
+  getCollections,
+  getCollectionProducts,
+} from "app/services/shopify/collections";
 import { getProducts } from "app/services/shopify/products";
 import { Collections, ProductType } from "app/types/products";
 
 interface CategoriesProps {
   params: {
-    categories: string;
-    searchParams?: string; 
-  }
-}  
-async function Categories(props: CategoriesProps ) {
-  const products: ProductType[] = await getProducts()
+    categories: string[];
+    searchParams?: string;
+  };
+}
+async function Categories({ params }: CategoriesProps) {
+    const resolvedParams = await params;
+  const { categories } = resolvedParams;
+  
+  let products: ProductType[] = [];
+  const collections = await getCollections();
 
-  return (
-    <ProductsWrapper products={products}/>
-  )
+  if (categories?.length > 0) {
+    const selectedCollectionId = collections.find(
+      (collection: Pick<Collections, "id" | "title" | "handle">) =>
+        collection.handle === categories[0]
+    )?.id;
+
+    if (selectedCollectionId) {
+      products = await getCollectionProducts(selectedCollectionId);
+    }
+  } else {
+    products = await getProducts();
+  }
+
+  return <ProductsWrapper products={products} />;
 }
 
-export default Categories
+export default Categories;
